@@ -107,7 +107,7 @@ html_css_files = [
 # html_sidebars = {}
 
 html_show_sourcelink = False
-html_logo = '_static/50_ratenkauf_Logo_1240x824_easyCredit.png'
+html_logo = '_static/easycredit-logo.svg'
 html_favicon = '_static/favicon.ico'
 
 # -- Options for HTMLHelp output ---------------------------------------------
@@ -157,13 +157,13 @@ latex_elements = {
 }
 latex_show_urls = 'footnote'
 
-latex_logo = '_static/50_ratenkauf_Logo_1240x824_easyCredit.png'
+latex_logo = '_static/easycredit-logo.svg'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'sw-easycredit.tex', u'easyCredit-Ratenkauf für Shopware 5.x',
+    (master_doc, 'sw-easycredit.tex', u'easyCredit-Rechnung & Ratenkauf für Shopware 5.x',
      u'Teambank AG', 'manual'),
 ]
 
@@ -173,7 +173,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'sw-easycredit', u'easyCredit-Ratenkauf für Shopware 5.x',
+    (master_doc, 'sw-easycredit', u'easyCredit-Rechnung & Ratenkauf für Shopware 5.x',
      [author], 1)
 ]
 
@@ -184,7 +184,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'sw-easycredit', u'easyCredit-Ratenkauf für Shopware 5.x',
+    (master_doc, 'sw-easycredit', u'easyCredit-Rechnung & Ratenkauf für Shopware 5.x',
      author, 'sw-easycredit', 'One line description of project.',
      'Miscellaneous'),
 ]

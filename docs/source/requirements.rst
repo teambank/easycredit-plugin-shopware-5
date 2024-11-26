@@ -2,10 +2,10 @@
 Voraussetzungen
 ================
 
-Zu Nutzung von **easyCredit-Ratenkauf für Shopware** benötigen Sie:
+Zu Nutzung von **easyCredit-Rechnung & Ratenkauf für Shopware** benötigen Sie:
 
 * eine funktionierende **Shopware 5.x** Installation
-* valide API-Zugangsdaten zu *easyCredit-Ratenkauf*
+* valide API-Zugangsdaten zu *easyCredit*
 * die aktuelle Version der Shopware 5.x Extension für easyCredit-Ratenkauf (siehe https://www.easycredit-ratenkauf.de/system/shopware/)
 
 Versionskompatibilität

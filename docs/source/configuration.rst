@@ -32,7 +32,7 @@ Die Konfigurationsmöglichkeiten sind im Folgenden gezeigt. Als Mindestkonfigura
 Zahlungsart Einstellungen
 -------------------------
 
-Um die Zahlungsart **easyCredit-Ratenkauf** im Frontend anzuzeigen, muss die Zahlungsart aktiviert sein, und dem Land *Deutschland* zugewiesen werden. Navigieren Sie hierzu zu den Zahlungsart Einstellungen: :menuselection:`System -> Konfiguration -> Zahlungsarten -> easyCredit-Ratenkauf`
+Um die Zahlungsart **easyCredit-Ratenkauf** im Frontend anzuzeigen, muss die Zahlungsart aktiviert sein, und dem Land *Deutschland* zugewiesen werden. Navigieren Sie hierzu zu den Zahlungsart Einstellungen: :menuselection:`Einstellungen -> Zahlungsarten -> easyCredit-Ratenkauf`
 Im ersten Reiter **Generell** stellen Sie sicher, dass **easyCredit-Ratenkauf** aktiviert ist.
 
 .. image:: ./_static/config-payment-active.png
@@ -45,6 +45,13 @@ Aktivieren Sie als letzten Schritt nun im Reiter **Länder-Auswahl** das Land **
 
 .. image:: ./_static/config-payment-country.png
 
+Versandart Einstellungen
+-------------------------
+
+Jeder Versandart müssen zusätzlich noch die Zahlungsarten zugewiesen werden, damit  Shopware diese zur Auswahl darstellen kann. 
+Unter :menuselection:`Einstellungen -> Versandkosten` bearbeiten Sie die entsprechende Versandart. Im Reiter **Zahlart Auswahl** fügen Sie dazu die Zahlungsart **easyCredit-Ratenkauf** zur rechten Liste hinzu und klicken auf **Speichern**.
+
+.. image:: ./_static/config-shipping.png
 
 Verhalten konfigurieren
 -----------------------
