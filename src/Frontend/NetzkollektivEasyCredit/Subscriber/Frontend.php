@@ -578,9 +578,22 @@ class Frontend implements SubscriberInterface
             return $this->_redirToPaymentSelection($action);
         }
 
-        if (!$this->helper->getPlugin()->isValid()) {
-            $this->helper->getPlugin()->getStorage()->set('apiError', self::INTEREST_REMOVED_ERROR);
-            return $this->_redirToPaymentSelection($action);
+        $quote = $this->helper->getPlugin()->getQuote();
+
+        if (
+            !$this->helper->getPlugin()->isInterestInBasket() ||
+            !$checkout->verifyAddress($quote) ||
+            $this->helper->getPlugin()->getStorage()->get('payment_type') !== $quote->getPaymentType()
+        ) {
+            return $this->_redirToPaymentSelection($action, self::INTEREST_REMOVED_ERROR);
+        }
+
+        if (!$checkout->isAmountValid($quote)) {
+            try {
+                $checkout->update($quote);
+            } catch (\Throwable $e) {
+                return $this->_redirToPaymentSelection($action, self::INTEREST_REMOVED_ERROR);
+            }
         }
 
         try {
@@ -591,13 +604,15 @@ class Frontend implements SubscriberInterface
 
             $checkout->loadTransaction();
         } catch (\Exception $e) {
-            $this->helper->getPlugin()->getStorage()->set('apiError', $e->getMessage());
-            return $this->_redirToPaymentSelection($action);
+            return $this->_redirToPaymentSelection($action, $e->getMessage());
         }
     }
 
-    protected function _redirToPaymentSelection($action)
+    protected function _redirToPaymentSelection($action, $error = null)
     {
+        if ($error !== null) {
+            $this->helper->getPlugin()->getStorage()->set('apiError', $error);
+        }
         $action->redirect(array(
             'controller' => 'checkout',
             'action' => 'shippingPayment'

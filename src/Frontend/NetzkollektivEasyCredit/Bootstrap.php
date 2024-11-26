@@ -408,6 +408,11 @@ extends Shopware_Components_Plugin_Bootstrap
 
     public function getInterestAmount()
     {
+        $interestAmount = Shopware()->Session()->offsetGet('EasyCredit')['interest_amount'];
+        if ($interestAmount == null) {
+          return $interestAmount;
+        }
+
         $basket = Shopware()->Modules()->Basket()->sGetBasket();
 
         $content = $basket['content'];
