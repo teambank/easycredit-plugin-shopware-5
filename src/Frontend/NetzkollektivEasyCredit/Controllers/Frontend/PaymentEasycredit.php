@@ -185,6 +185,8 @@ class Shopware_Controllers_Frontend_PaymentEasycredit extends Shopware_Controlle
     {
         $this->Front()->Plugins()->ViewRenderer()->setNoRender();
 
+        $this->helper->getPlugin()->clear();
+
         $basket = $this->getModule('basket');
         if ($productNumber = $this->Request()->getParam('sAdd')) {
             $basket->sDeleteBasket();

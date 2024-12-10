@@ -15,7 +15,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Frontend implements SubscriberInterface
 {
-    const INTEREST_REMOVED_ERROR = 'Der Bestellwert oder die Adresse hat sich geändert.';
+    const VALIDATE_AMOUNT_ERROR = 'Der Bestellwert hat sich geändert.';
+    const VALIDATE_ADDRESS_ERROR = 'Die Adresse hat sich geändert.';
+    const VALIDATE_EXPIRED_ERROR = 'Der Vorgang wurde nicht genehmigt oder ist abgelaufen.';
+
     const INTEREST_ORDERNUM = 'sw-payment-ec-interest';
 
     protected $bootstrap;
@@ -298,15 +301,14 @@ class Frontend implements SubscriberInterface
 
         $paymentId = (int)$request->getPost('payment');
 
+        // different payment method => clear storage & return
         if (!$this->helper->getPlugin()->isSelected($paymentId)) {
             $this->helper->getPlugin()->clear();
             return;
         }
 
-        if (
-            $this->helper->getPlugin()->isSelected($paymentId)
-            && $paymentId !== Shopware()->Session()->offsetGet('sPaymentID')
-        ) {
+        // easyCredit payment type changed => clear storage
+        if ($paymentId !== Shopware()->Session()->offsetGet('sPaymentID')) {
             $this->helper->getPlugin()->clear();
         }
 
@@ -321,10 +323,13 @@ class Frontend implements SubscriberInterface
             return;
         }
 
-        if (isset($params['number-of-installments']) && $params['number-of-installments'] > 0) {
+        // => clear storage before initialization
+        $this->helper->getPlugin()->clear();
+
+        if (isset($params['numberOfInstallments']) && $params['numberOfInstallments'] > 0) {
             $this->helper->getPlugin()
                 ->getStorage()
-                ->set('duration', $params['number-of-installments']);
+                ->set('duration', $params['numberOfInstallments']);
         }
         $this->helper->getPlugin()->getStorage()->set('express', false);
 
@@ -340,10 +345,6 @@ class Frontend implements SubscriberInterface
             return;
         }
 
-        if ($this->helper->getPlugin()->isInterestInBasket() !== false) {
-            $this->helper->getPlugin()->clear();
-        }
-
         if ($url = $this->getRedirectUrl()) {
             return $action->redirect($url);
         }
@@ -355,9 +356,6 @@ class Frontend implements SubscriberInterface
 
     protected function _handleRedirect($action)
     {
-        if ($this->helper->getPlugin()->isInterestInBasket() !== false) {
-            $this->helper->getPlugin()->clear();
-        }
         if ($this->helper->getPlugin()->isValid()) {
             return;
         }
@@ -579,27 +577,25 @@ class Frontend implements SubscriberInterface
         }
 
         $quote = $this->helper->getPlugin()->getQuote();
-
-        if (
-            !$this->helper->getPlugin()->isInterestInBasket() ||
-            !$checkout->verifyAddress($quote) ||
-            $this->helper->getPlugin()->getStorage()->get('payment_type') !== $quote->getPaymentType()
-        ) {
-            return $this->_redirToPaymentSelection($action, self::INTEREST_REMOVED_ERROR);
+        if (!$this->helper->getPlugin()->isInterestInBasket()) {
+            return $this->_redirToPaymentSelection($action);
+        }
+        if (!$checkout->verifyAddress($quote)) {
+            return $this->_redirToPaymentSelection($action, self::VALIDATE_ADDRESS_ERROR);
         }
 
         if (!$checkout->isAmountValid($quote)) {
             try {
                 $checkout->update($quote);
             } catch (\Throwable $e) {
-                return $this->_redirToPaymentSelection($action, self::INTEREST_REMOVED_ERROR);
+                return $this->_redirToPaymentSelection($action, self::VALIDATE_AMOUNT_ERROR);
             }
         }
 
         try {
             $approved = $checkout->isApproved();
             if (!$approved) {
-                throw new \Exception($this->helper->getPlugin()->getLabel() . ' wurde nicht genehmigt.');
+                throw new \Exception(self::VALIDATE_EXPIRED_ERROR);
             }
 
             $checkout->loadTransaction();
