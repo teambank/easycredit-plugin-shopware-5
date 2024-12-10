@@ -191,9 +191,15 @@ class Shopware_Controllers_Frontend_PaymentEasycredit extends Shopware_Controlle
             $basket->sAddArticle($productNumber, (int) $this->Request()->getParam('sQuantity', 1));
         }
 
-        $this->updatePaymentMethod(
-            $this->Request()->getParam('easycredit')['paymentType']
-        );
+        $params = $this->Request()->getParam('easycredit');
+
+        $this->updatePaymentMethod($params['paymentType']);
+
+        if (isset($params['numberOfInstallments']) && $params['numberOfInstallments'] > 0) {
+            $this->helper->getPlugin()
+                ->getStorage()
+                ->set('duration', $params['numberOfInstallments']);
+        }
 
         $checkoutController = $this->getCheckoutController();
         $checkoutController->getSelectedCountry();
@@ -205,8 +211,7 @@ class Shopware_Controllers_Frontend_PaymentEasycredit extends Shopware_Controlle
         $admin->sGetPremiumShippingcosts(\reset($countries));
 
         $basket->sGetBasket();
-
-        $this->helper->getPlugin()->getStorage()->set('express', 1);
+        $this->helper->getPlugin()->getStorage()->set('express', true);
     }
 
     public function respondWithStatus($content, $code = 200)
