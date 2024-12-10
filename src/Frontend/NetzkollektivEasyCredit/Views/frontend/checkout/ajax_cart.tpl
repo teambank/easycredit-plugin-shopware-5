@@ -6,7 +6,7 @@
 
     {block name='frontend_checkout_ajax_cart_easycredit_express'}
         {if $EasyCreditExpressOffCanvas}
-            {include file='frontend/plugins/payment/easycredit/express-button.tpl'}
+            {include file='frontend/plugins/payment/easycredit/express-button.tpl' amount="{$sBasket.AmountNumeric}"}
         {/if}
     {/block}
 

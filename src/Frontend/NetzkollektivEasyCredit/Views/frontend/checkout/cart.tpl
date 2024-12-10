@@ -22,7 +22,7 @@
 
     {block name='frontend_checkout_cart_table_actions_easycredit_express'}
         {if $EasyCreditExpressCart}
-            {include file='frontend/plugins/payment/easycredit/express-button.tpl'}
+            {include file='frontend/plugins/payment/easycredit/express-button.tpl' amount="{$sBasket.AmountNumeric}"}
         {/if}
     {/block}
 {/block}
