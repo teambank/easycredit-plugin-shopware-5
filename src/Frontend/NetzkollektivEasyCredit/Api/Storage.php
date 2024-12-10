@@ -30,6 +30,9 @@ class Storage implements \Teambank\EasyCreditApiV3\Integration\StorageInterface
     }
 
     public function clear() {
+        if (Shopware()->Config()->get('easycreditDebugLogging')) {
+            Shopware()->Container()->get('pluginlogger')->debug('Storage::clear()');
+        }
         unset(Shopware()->Session()->EasyCredit);
         return $this;
     }
