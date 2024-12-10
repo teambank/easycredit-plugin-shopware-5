@@ -109,11 +109,11 @@ export const goThroughPaymentPage = async ({
     await page.getByTestId("uc-deny-all-button").click();
 
     await expect(
-      page.getByText(
+      page.getByRole('heading',{ name:
         paymentType === PaymentTypes.INSTALLMENT
           ? "Monatliche Wunschrate"
           : "Ihre Bezahloptionen"
-      )
+      })
     ).toBeVisible();
 
     await page.getByRole("button", { name: "Weiter zur Dateneingabe" }).click();
@@ -148,7 +148,7 @@ export const goThroughPaymentPage = async ({
     );
 
     await delay(500);
-    await page.getByRole("button", { name: "Ratenwunsch übernehmen" }).click();
+    await page.getByRole("button", { name: "Zahlungswunsch übernehmen" }).click();
   });
 };
 
@@ -164,7 +164,6 @@ export const confirmOrder = async ({
       paymentType === PaymentTypes.INSTALLMENT ? "Ratenkauf" : "Rechnung"
     );
 
-    /* temporarly disabled, waiting for implementation on api side
     if (paymentType === PaymentTypes.INSTALLMENT) {
       await expect
         .soft(page.locator(".product--table"))
@@ -174,7 +173,6 @@ export const confirmOrder = async ({
         .soft(page.locator(".product--table"))
         .not.toContainText("Zinsen für Ratenzahlung");
     }
-    */
 
     /* Confirm Page */
     await page.locator("#sAGB").check();
@@ -205,7 +203,7 @@ export const checkAddressInvalidation = async (page) => {
     await page.getByText("Adresse speichern", { exact: true }).click();
 
     await expect(page.locator(".alert")).toContainText(
-      "Der Bestellwert oder die Adresse hat sich geändert."
+      "Die Adresse hat sich geändert."
     );
   });
 };
@@ -222,7 +220,7 @@ export const checkAmountInvalidation = async (page) => {
     );
 
     await expect(page.locator(".alert")).toContainText(
-      "Der Bestellwert oder die Adresse hat sich geändert."
+      "Der Bestellwert hat sich geändert."
     );
   });
 };
