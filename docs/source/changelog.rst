@@ -1,6 +1,14 @@
 Changelog
 =========
 
+v3.0.1
+------
+
+* bei Rechnungskauf-Vorgängen wird keine Zinsposition mehr angezeigt
+* der Express-Button erhält nun den korrekten Betrag (Produktpreis & Warenkorb-Betrag)
+* die Anzahl der Raten wird aus dem Express-Button übernommen  
+* die Initialisierungslogik wurde überarbeitet (detailierteres Fehlerreporting & zuverlässigere Initialisierung)
+
 v3.0.0
 ------
 

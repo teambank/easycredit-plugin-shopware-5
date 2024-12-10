@@ -29,7 +29,7 @@ extends Shopware_Components_Plugin_Bootstrap
 
     public function getVersion()
     {
-        return '3.0.0';
+        return '3.0.1';
     }
 
     public function getInfo()
