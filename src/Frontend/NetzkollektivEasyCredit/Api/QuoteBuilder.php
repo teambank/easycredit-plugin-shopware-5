@@ -144,20 +144,8 @@ class QuoteBuilder
         ));
     }
 
-    public function createPaymentUniqueId()
-    {
-        if (class_exists('\Shopware\Components\Random')) {
-            return \Shopware\Components\Random::getAlphanumericString(32);
-        }
-        return md5(uniqid(mt_rand(), true));
-    }
-
     protected function getRedirectLinks()
     {
-        if (!$this->storage->get('sec_token')) {
-            $this->storage->set('sec_token', $this->createPaymentUniqueId());
-        }
-
         return new \Teambank\EasyCreditApiV3\Model\RedirectLinks([
             'urlSuccess' => $this->_getUrl('return'),
             'urlCancellation' => $this->_getUrl('cancel'),
