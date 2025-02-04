@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v3.0.2
+------
+
+* die Zinsen werden nach Bestellabschluss wieder aus der Bestellung entfernt, wenn aktiviert 
+
 v3.0.1
 ------
 
