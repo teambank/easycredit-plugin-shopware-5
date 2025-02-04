@@ -121,8 +121,8 @@ class Frontend implements SubscriberInterface
 
         $orderVariables = $args->get('variables');
         if (
-            !isset($orderVariables['additional']['payment']['name'])
-            || $orderVariables['additional']['payment']['name'] != 'easycredit'
+            !isset($orderVariables['additional']['payment']['class'])
+            || $orderVariables['additional']['payment']['class'] != 'easycredit'
         ) {
             return;
         }

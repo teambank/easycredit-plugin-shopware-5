@@ -43,7 +43,7 @@ if (!process.env.BASE_URL) {
     ...{
       webServer: {
         command:
-          "cd /opt/shopware; PHP_CLI_SERVER_WORKERS=8 sudo php -S 0.0.0.0:80 -t . router.php",
+          "cd /opt/shopware; PHP_CLI_SERVER_WORKERS=8 sudo php -q -S 0.0.0.0:80 -t . router.php",
         url: "http://localhost/",
         reuseExistingServer: !process.env.CI,
         stdout: "ignore",

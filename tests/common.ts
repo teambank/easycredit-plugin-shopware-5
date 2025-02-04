@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { delay, randomize, clickWithRetry } from "./utils";
 import { PaymentTypes } from "./types";
+import { createApiClient, apiDefaultHeaders } from "./api"
 
 export const goToProduct = async (page, sku = "regular") => {
   await test.step(`Go to product (sku: ${sku}}`, async () => {
@@ -184,6 +185,25 @@ export const confirmOrder = async ({
     await expect(
       page.getByText("Vielen Dank für Ihre Bestellung")
     ).toBeVisible();
+
+    if (paymentType === PaymentTypes.INSTALLMENT) {
+      const textContent = await page.locator('.finish--details').textContent();
+      const orderNumber = textContent.match(/Bestellnummer: (\d+)/)[1];
+
+      const apiClient = await createApiClient();
+      const orderResponse = await apiClient
+        .get(`/api/orders/${orderNumber}?useNumberAsId=true`, {
+          headers: apiDefaultHeaders,
+        });
+      const order = await orderResponse.json()
+      console.log(order)
+      await expect(
+        order.data.details.filter(
+          (pos) => pos.articleNumber === "sw-payment-ec-interest"
+        ),
+        "Interest should be removed after order (default setting)"
+      ).toHaveLength(0);
+    }
   });
 };
 

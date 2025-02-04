@@ -1,23 +1,12 @@
-import { chromium, request, type FullConfig } from "@playwright/test";
+import { createApiClient, apiDefaultHeaders } from "./api"
 
-async function globalSetup(config: FullConfig) {
+async function globalSetup() {
   console.log("[prepareData] preparing test data in store");
 
-  const username = "demo";
-  const apiKey = "dVHnNzuVi4wvTcwV36K12D0OFgqvVzTxsRvTmRqC";
+  const apiClient = await createApiClient();
 
-  var headers = {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-    Authorization: "Basic " + btoa(username + ":" + apiKey),
-  };
-
-  const req = await request.newContext({
-    baseURL: config.projects[0].use.baseURL,
-  });
-
-  let response = await req.post("/api/categories", {
-    headers: headers,
+  let response = await apiClient.post("/api/categories", {
+    headers: apiDefaultHeaders,
     data: {
       name: "Default",
       active: true,
@@ -90,8 +79,8 @@ async function globalSetup(config: FullConfig) {
   ];
 
   for (const productData of productsData) {
-    const response = await req.post("/api/articles", {
-      headers: headers,
+    const response = await apiClient.post("/api/articles", {
+      headers: apiDefaultHeaders,
       data: {
           ...baseProductData,
           ...productData,
