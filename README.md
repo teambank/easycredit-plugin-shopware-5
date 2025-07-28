@@ -1,8 +1,35 @@
-# easyCredit-Rechnung & Ratenkauf Plugin for Shopware 5 - Installment & Bill Payment Plugin
+# easyCredit-Rechnung & Ratenkauf Plugin for Shopware 5 - Business Services von easyCredit
 
-easyCredit-Ratenkauf is the easiest and fastest installment payment solution of Germany. Join today to get the simplest way of partial payment for your POS and E-Commerce. easyCredit-Ratenkauf gives you the opportunity to offer installments as an additional payment method in your German WooCommerce store.
+Wir bieten Ihren Kunden flexible, transparente und sichere Zahlungsmöglichkeiten.
+Sie erhalten Zugang zu einer führenden Raten- und Rechnungsoptionen, die Ihren Umsatz ankurbeln und die Kundenzufriedenheit steigern.
+🏆 Ausgezeichnet als **“Leader Payment” von OMR Reviews im Q1/25**.
 
-Traditional financing solutions are often connected with complicated application processes for customers. With easyCredit-Ratenkauf you can offer a simple, fully online and fast financing solution. Customers can use ‚easyCredit-Ratenkauf‘ in just a few steps: choose their purchases, calculate their preferred installments, enter their personal data, and pay. No paperwork, immediate approval, and complete flexibility throughout. Simple. Fair. Paying in installments with ‚easyCredit-Ratenkauf‘.
+🚀 Erweitern Sie mit **easyCredit-Ratenkauf** und **easyCredit-Rechnung** Ihr Paymentangebot.
+Vertrauen Sie auf unsere langjährige Erfahrung im Liquiditätsmanagement und die bewiesene hohe Kundenzufriedenheit mit dem easyCredit.
+
+## 🔍 Unsere Lösungen im Detail:
+
+### 🛍️  easyCredit-Ratenkauf:
+
+• Für Warenkörbe von **200 Euro bis 10.000 Euro**
+• Frei wählbare Laufzeiten von **2 bis 60 Monate**
+
+### 🧾 easyCredit-Rechnung:
+
+• Für Warenkörbe von **50 Euro bis 5.000 Euro**
+• **Schnelle Auszahlung** für Sie trotz **30 Tage Zahlpause** für Ihre Kunden
+
+## Ihre Vorteile:
+
+✅ **Einfach** – Ein Plugin für beide Zahlarten
+⚖️ **Fair** – Einfaches, transparentes Preismodell
+🔐 **Sicher** – Wir übernehmen das volle Ausfallrisiko
+
+## Vorteile für den Endkunden:
+
+⚡ **Sofort** – Sofortige Entscheidung im Zahlungsvorgang. Ganz bequem ohne PostIdent-Verfahren
+🧩 **Einfach** – Direkter Abschluss ohne App und Login
+🔁 **Flexibel** – Vorzeitige Rückzahlung des Ratenkaufkunden möglich
 
 # Getting started
 Are you interested in using easyCredit-Ratenkauf? Contact us now:
